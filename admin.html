@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="text/icon" href="images/favicon1.png" />
+
+    <title>Admin</title>
+
+    <link rel="stylesheet" type="text/css" href="css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+
+  <style>
+    h1 {
+      text-align: center;
+    }
+  </style>
+
+  <body style="background-color: white">
+    <h1>Welcome Admin</h1>
+
+    <label>Product Image : </label>
+    <input type="text" name="image" id="image" /><br /><br />
+
+    <label>Product Name : </label>
+    <input type="text" name="name" id="name" /><br /><br />
+
+    <label>Product Price : </label>
+    <input type="text" name="price" id="price" /><br /><br />
+
+    <label>Product Description : </label>
+    <input type="text" name="description" id="description" /><br /><br />
+
+    <button onclick="addData()">Add</button>
+    <button onclick="clearData()">Clear</button><br /><br />
+
+    
+
+    <table border="1" cellspacing="0" cellpadding="10px">
+      <thead>
+        <tr>
+          <th>Product Image</th>
+          <th>Product Name</th>
+          <th>Product Price</th>
+          <th>Product Description</th>
+          <th>Remove</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+
+    <script>
+      let list = JSON.parse(localStorage.getItem("list")) || [];
+      let tbody = document.getElementById("tbody");
+
+      //load data
+      let loadData = () => {
+        list.map((val, ind) => {
+          let tr = document.createElement("tr");
+          tr.innerHTML = `
+                          <td>${val.image}</td>
+                          <td>${val.name}</td>
+                          <td>${val.price}</td>
+                          <td>${val.description}</td>
+                          <td><button onclick="removeData(${ind})">Delete</button></td>
+                          <td><button onClick="viewData(${ind})" >View</button></td>
+                          `;
+          tbody.appendChild(tr);
+        });
+      };
+
+      //add data
+      let addData = () => {
+        let image = document.getElementById("image").value;
+        let name = document.getElementById("name").value;
+        let price = document.getElementById("price").value;
+        let description = document.getElementById("description").value;
+
+       
+
+        let data = {
+          image,
+          name,
+          price,
+          description,
+        };
+        list.push(data);
+
+        localStorage.setItem("list", JSON.stringify(list));
+        location.reload();
+      };
+
+      let clearData = () => {
+        localStorage.clear();
+        location.reload();
+      };
+
+      //delete data
+      function removeData(index) {
+        console.log(index);
+        let result = list[index];
+        console.log(result);
+        console.log("deleted success");
+
+        let newlist = list.filter((val) => val.name !== result.name);
+        console.log(newlist);
+
+        localStorage.setItem("list", JSON.stringify(newlist));
+        location.reload();
+      }
+
+
+      loadData();
+    </script>
+  </body>
+</html>

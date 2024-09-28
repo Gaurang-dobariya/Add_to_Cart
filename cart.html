@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="text/icon" href="images/favicon1.png" />
+
+    <title>Cart</title>
+
+    <link rel="stylesheet" type="text/css" href="css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  </head>
+
+  <body>
+
+   <!-- Header -->
+
+    <header>
+      <nav class="navbar1">
+        <!-- first box  -->
+        <div class="col-2 col-md-4 col-xl-3 d-flex align-items-center">
+          <div class="nav-logo border1 ps-0 ps-md-3 d-flex">
+            <div class="logo d-flex align-items-center">
+              <img class="mt-1" src="images/a-logo.png" alt="" />
+            </div>
+            <span class="pt-2">.in</span>
+          </div>
+
+          <div
+            class="nav-address border1 mobile-hidden mx-auto d-none d-md-block"
+          >
+            <p class="d-add m-0 ms-3">Delivering to Surat 395007</p>
+
+            <div class="add-location">
+              <i class="fa-solid fa-location-dot me-1"></i>
+              <p class="location m-0">Update location</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="search-box col-8 col-md-3 col-xl-5">
+          <div class="select-box">
+            <select>
+              <option value="All">All</option>
+              <option value="All">2</option>
+              <option value="All">3</option>
+            </select>
+          </div>
+          <div class="search-input">
+            <input type="text" placeholder="Search Amazon" />
+          </div>
+
+          <div class="search-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+        </div>
+
+        <div
+          class="col-2 col-md-5 col-xl-4 d-flex justify-content-evenly align-items-center"
+        >
+          <div class="language-box border1 mobile-hidden d-none d-md-flex">
+            <div class="country">
+              <img src="images/flag-ind.jpg" />
+            </div>
+
+            <div class="language">
+              <p>EN</p>
+              <i class="fa-solid fa-caret-down arrow ms-1"></i>
+            </div>
+          </div>
+
+          <div
+            class="account-box nav-same-format border1 mobile-hidden d-none d-md-block"
+          >
+            <p><span>Hello, sign in</span></p>
+            <p>Account & Lists</p>
+          </div>
+
+          <div
+            class="return-box nav-same-format border1 mobile-hidden d-none d-md-block"
+          >
+            <p><span>Returns</span></p>
+            <p>& Orders</p>
+          </div>
+
+          <div class="cart-box border1">
+            <span class="total-item">0</span>
+            <a href="cart.html"
+              ><img onclick="cart()" src="images/cart.png"
+            /></a>
+            <p class="mt-4">Cart</p>
+          </div>
+        </div>
+      </nav>
+
+      <div class="panel">
+        <div class="panel-all border1">
+          <i class="fa-solid fa-bars"></i>
+          All
+        </div>
+
+        <div class="link">
+          <a href="product.html" class="border1" onclick="products()"
+            >Products</a
+          >
+          <a class="border1">Today's Deals</a>
+          <a href="#" class="border1">Customer Service</a>
+          <a href="#" class="border1 mobile-hidden">Registry</a>
+          <a href="#" class="border1">Gift Cards</a>
+          <a href="#" class="border1">Sell</a>
+        </div>
+      </div>
+    </header>
+
+    
+
+    <div id="cart">
+      <div id="row"></div>
+    </div>
+
+    <!-- =========== footer ============= -->
+
+    <section class="back-top" style="margin-top: 500px">
+      <p class="m-0">Back to top</p>
+    </section>
+
+    <section class="footer-first-shortcut-links">
+      <div>
+        <p>Get to Know Us</p>
+        <div class="links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press Releases</a>
+          <a href="#">Amazon Science</a>
+        </div>
+      </div>
+
+      <div>
+        <p>Connect with us</p>
+        <div class="links">
+          <a href="#">Facbook Card</a>
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+
+      <div>
+        <p>Make Money with Us</p>
+        <div class="links">
+          <a href="#">Sell on Amazon</a>
+          <a href="#">Sell under Amazon Accelerator</a>
+          <a href="#">Protect and Build Your Brand</a>
+          <a href="#">Amazon Global Selling</a>
+          <a href="#">Become an Affiliate</a>
+          <a href="#">Fulfilment by Amazon</a>
+          <a href="#">Advertise Your Products</a>
+          <a href="#">Amazon Pay on Merchants</a>
+        </div>
+      </div>
+
+      <div>
+        <p>Let Us Help You</p>
+        <div class="links">
+          <a href="#">COVID-19 and Amazon</a>
+          <a href="#"> Your Account</a>
+          <a href="#">Returns Centre</a>
+          <a href="#">100% Purchase Protection</a>
+          <a href="#">Amazon App Download</a>
+          <a href="#">Help</a>
+        </div>
+      </div>
+    </section>
+
+    <script src="Js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      let cart = JSON.parse(localStorage.getItem("list"));
+
+      let loadData = () => {
+        let row = document.getElementById("row");
+
+        cart.map((val, ind) => {
+          let card = document.createElement("card");
+          card.innerHTML = `
+                <div class="product-card card">
+                    <div class="product-image"><img src="${val.image}" alt=""></div>
+                    <div class="product-title">${val.name}</div>
+                    <div class="product-price">${val.price}</div>
+                    <div class="product-description">${val.description}</div>
+                    <button onclick="removeData(${ind})" class="product-button">Add to Cart</button>
+                </div>
+                `;
+          row.appendChild(card);
+        });
+      };
+      loadData();
+
+      let cartdata = (ind) => {
+        let list = cart[ind];
+        cart.push(list);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        location.reload();
+      };
+   
+
+      function removeData(index) {
+        console.log(index);
+        let result = cart[index];
+        console.log(result);
+        console.log("deleted success");
+
+        let newlist = cart.filter((val) => val.name !== result.name);
+        console.log(newlist);
+
+        localStorage.setItem("list", JSON.stringify(newlist));
+        location.reload();
+      }
+    </script>
+  </body>
+</html>
